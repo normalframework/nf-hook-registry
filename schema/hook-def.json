@@ -1,0 +1,305 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/Hook",
+  "definitions": {
+    "Hook": {
+      "properties": {
+        "required_labels": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.Label"
+          },
+          "type": "array",
+          "description": "maybe we can extract these from the source in some cases"
+        },
+        "optional_labels": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.Label"
+          },
+          "type": "array"
+        },
+        "mode": {
+          "enum": [
+            "MODE_DISABLED",
+            0,
+            "MODE_ON_REQUEST",
+            1,
+            "MODE_ON_DATA",
+            2,
+            "MODE_SCHEDULED",
+            3
+          ],
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Hook Run Mode"
+        },
+        "command_expiration": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "if not blank, running the hook will create a command context with the following expiration duration.  Each time the hook is run, the context will be extended by this amount.",
+          "format": "regex"
+        },
+        "invoke_timeout": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "timeout for calling StartHook.  if the timeout expires before the hook run finishes, the runtime will be killed and restarted.",
+          "format": "regex"
+        },
+        "runtime_config": {
+          "$ref": "#/definitions/normalgw.automation.v1.HookRuntimeConfiguration",
+          "additionalProperties": true
+        },
+        "required_classes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "global_variables": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.Variable"
+          },
+          "type": "array",
+          "description": "program variables which are created once for the hook"
+        },
+        "group_variables": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.Variable"
+          },
+          "type": "array",
+          "description": "program variables which are created for each group"
+        },
+        "label_attribute": {
+          "type": "string",
+          "description": "name of the attribute containing point labels. points without this attribute will be dropped"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.HookInput"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook",
+      "description": "A hook is a unit of code that runs in response to events."
+    },
+    "normalgw.automation.v1.Groups": {
+      "properties": {
+        "keys": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "a list of attribute names which form the group key"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Groups"
+    },
+    "normalgw.automation.v1.HookEvent": {
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "properties": {
+            "type_url": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            },
+            "value": {
+              "type": "string",
+              "description": "Must be a valid serialized protocol buffer of the above specified type.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Event",
+      "description": "a hook event is a structured event produced during the execution of the hook, sent from the runtime to Normal"
+    },
+    "normalgw.automation.v1.HookInput": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "HOOK_INPUT_MODE_SINGLETON",
+            0,
+            "HOOK_INPUT_MODE_VECTOR",
+            1,
+            "HOOK_INPUT_MODE_MATRIX",
+            2
+          ],
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Hook Input Mode"
+        },
+        "required_labels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Input"
+    },
+    "normalgw.automation.v1.HookRuntimeConfiguration": {
+      "properties": {
+        "memory_limit": {
+          "type": "integer",
+          "description": "the memory limit for the hook runtime in MB"
+        },
+        "cpu_limit": {
+          "type": "integer",
+          "description": "the CPU limit for the hook runtime"
+        },
+        "max_requests_per_lifetime": {
+          "type": "integer"
+        },
+        "lifetime": {
+          "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+          "type": "string",
+          "description": "the time period for hook runtime",
+          "format": "regex"
+        },
+        "min_instances": {
+          "type": "integer",
+          "description": "minimum  number of instances of the hook runtime"
+        },
+        "max_instances": {
+          "type": "integer",
+          "description": "maximum number of instances of the hook runtime"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Runtime Configuration"
+    },
+    "normalgw.automation.v1.Label": {
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Label"
+    },
+    "normalgw.automation.v1.Variable": {
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "UUIDs are assigned and managed by the runtime"
+        },
+        "label": {
+          "type": "string",
+          "description": "the label of the variable. will be available by this name inside of the hook function"
+        },
+        "attrs": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "map of attributes to add to the variables  Attribute Values may used Handlebars-style templates to refer to input values  the following context is avaialbe in the templates:    Point: an example point    Points: a list of all points in the group    GroupName: the name of the current group    Label: the point label  For instance, {{ Point.Attrs.airRef }} would set the attribute  to the airRef attribute of an input point By default, attributes are set in the automation layer.  However, they may be set on a different layer by adding the output layer name, such as `model.airRef`.  So setting `model.airRef = {{ Point.Attrs.airRef }}` would set the variable's `airRef` on the model layer to the same value as a variable in the input group."
+        },
+        "value": {
+          "$ref": "#/definitions/normalgw.hpl.v1.Value",
+          "additionalProperties": true,
+          "description": "the current value of the variable"
+        },
+        "default_value": {
+          "$ref": "#/definitions/normalgw.hpl.v1.Value",
+          "additionalProperties": true,
+          "description": "the default value for variable point.  the variable will be set to this value when created or ResetVariables is called."
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Variable",
+      "description": "definition of a program variable"
+    },
+    "normalgw.hpl.v1.Value": {
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "null": {
+          "type": "boolean"
+        },
+        "boolean": {
+          "type": "boolean"
+        },
+        "unsigned": {
+          "type": "integer"
+        },
+        "signed": {
+          "type": "integer"
+        },
+        "real": {
+          "type": "number"
+        },
+        "double": {
+          "type": "number"
+        },
+        "octet_string": {
+          "type": "string",
+          "format": "binary",
+          "binaryEncoding": "base64"
+        },
+        "character_string": {
+          "type": "string"
+        },
+        "meta": {
+          "properties": {
+            "type_url": {
+              "type": "string",
+              "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. As of May 2023, there are no widely used type server implementations and no plans to implement one. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+            },
+            "value": {
+              "type": "string",
+              "description": "Must be a valid serialized protocol buffer of the above specified type.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Value"
+    }
+  }
+}

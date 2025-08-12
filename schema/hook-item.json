@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/HookItem",
+  "definitions": {
+    "HookItem": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the file containing the hook definition"
+        },
+        "description": {
+          "type": "string",
+          "description": "the description of the hook"
+        },
+        "entry_point": {
+          "type": "string",
+          "description": "the entry point of the hook"
+        },
+        "definition": {
+          "type": "string",
+          "description": "the definition of the hook"
+        }
+      },
+      "type": "object",
+      "title": "HookItem",
+      "description": "A hook is a unit of code that runs in response to events."
+    }
+  }
+}

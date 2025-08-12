@@ -1,0 +1,12 @@
+{
+  "$schema": "./schema/registry.json",
+  "name": "Normal Framework Hook Registry",
+  "hooks": [
+    {
+      "name": "Export Bacnet Objects",
+      "description": "A hook to export Bacnet objects",
+      "entry_point": "/registry/export-bacnet-objects/hook.js",
+      "definition": "registry/export-bacnet-objects/hook-def.json"
+    }
+  ]
+}

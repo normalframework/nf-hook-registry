@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "description": "A normal framework registry of basic hooks",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "hooks": {
+      "type": "array",
+      "items": {
+        "$ref": "./hook-item.json"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "hooks"
+  ],
+  "uniqueItems": true,
+  "minItems": 1
+}

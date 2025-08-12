@@ -1,0 +1,9 @@
+{
+  "$schema": "../../schema/hook-def.json",
+  "inputs": [
+    {
+      "name": "export",
+      "mode": "HOOK_INPUT_MODE_VECTOR"
+    }
+  ]
+}
