@@ -9,7 +9,7 @@
     "hooks": {
       "type": "array",
       "items": {
-        "$ref": "./hook-item.json"
+        "$ref": "./HookRegistryItem.json"
       }
     }
   },
