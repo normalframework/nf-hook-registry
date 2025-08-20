@@ -4,10 +4,6 @@
   "definitions": {
     "HookDefinition": {
       "properties": {
-        "entry_point": {
-          "type": "string",
-          "description": "the name of the file containing the hook definition"
-        },
         "required_labels": {
           "items": {
             "$ref": "#/definitions/normalgw.automation.v1.Label"
