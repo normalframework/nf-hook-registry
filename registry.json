@@ -20,10 +20,10 @@
     {
       "name": "NOT",
       "description": "A hook which inverts the input value",
-      "definition": "registry/export-bacnet-objects/hook-def.json",
+      "definition": "registry/not/hook-def.json",
       "files": [
         {
-          "path": "registry/export-bacnet-objects/hook.js",
+          "path": "registry/not/hook.js",
           "type": "registry:entry"
         },
         {
