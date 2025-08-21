@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schema/HookDefinition.json",
+  "globalVariables": [
+    {
+      "label": "out"
+    }
+  ],
+  "inputs": [
+    {
+      "name": "in"
+    }
+  ]
+}

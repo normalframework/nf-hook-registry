@@ -5,8 +5,32 @@
     {
       "name": "Export Bacnet Objects",
       "description": "A hook to export Bacnet objects",
-      "entry_point": "registry/export-bacnet-objects/hook.js",
-      "definition": "registry/export-bacnet-objects/hook-def.json"
+      "definition": "registry/export-bacnet-objects/hook-def.json",
+      "files": [
+        {
+          "path": "registry/export-bacnet-objects/hook.js",
+          "type": "registry:entry"
+        },
+        {
+          "path": "registry/lib/helpers.js",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "NOT",
+      "description": "A hook which inverts the input value",
+      "definition": "registry/export-bacnet-objects/hook-def.json",
+      "files": [
+        {
+          "path": "registry/export-bacnet-objects/hook.js",
+          "type": "registry:entry"
+        },
+        {
+          "path": "registry/lib/helpers.js",
+          "type": "registry:lib"
+        }
+      ]
     }
   ]
 }

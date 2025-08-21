@@ -1,22 +1,57 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
-  "description": "A normal framework registry of basic hooks",
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/HookRegistry",
+  "definitions": {
+    "HookRegistry": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "hooks": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.HookRegistryItem"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Registry"
     },
-    "hooks": {
-      "type": "array",
-      "items": {
-        "$ref": "./HookRegistryItem.json"
-      }
+    "normalgw.automation.v1.HookRegistryFile": {
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Registry File"
+    },
+    "normalgw.automation.v1.HookRegistryItem": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/definitions/normalgw.automation.v1.HookRegistryFile"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Hook Registry Item"
     }
-  },
-  "required": [
-    "name",
-    "hooks"
-  ],
-  "uniqueItems": true,
-  "minItems": 1
+  }
 }
