@@ -6,8 +6,9 @@ const NormalSdk = require("@normalframework/applications-sdk");
  * @returns {NormalSdk.InvokeResult}
  */
 module.exports = async ({ points, sdk }) => {
-  let point = points[0]
-  let newval = point.latestValue.value ? 0 : 1;
-  sdk.logEvent(`setting value to ${newval}`)
-  await point.write(newval)
+  for (const point of points) {
+    let newval = point.latestValue.value ? 0 : 1;
+    sdk.logEvent(`setting value of ${point.name} to ${newval}`)
+    await point.write(newval)
+  }
 };
