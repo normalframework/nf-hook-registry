@@ -1,5 +1,5 @@
 {
-  "$schema": "./schema/HookRegistry.json",
+  "$schema": "https://portal.normal-online.net/schema/HookRegistry.json",
   "name": "Normal Framework Hook Registry",
   "hooks": [
     {
