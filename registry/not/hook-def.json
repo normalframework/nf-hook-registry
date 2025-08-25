@@ -1,8 +1,9 @@
 {
-  "$schema": "https://portal.normal-online.net/schema/HookDefinition.json",
-  "globalVariables": [
+  "$schema": "../../schema/HookDefinition.json",
+  "outputs": [
     {
-      "label": "out"
+      "label": "out",
+      "type": "VARIABLE_TYPE_GLOBAL"
     }
   ],
   "inputs": [
