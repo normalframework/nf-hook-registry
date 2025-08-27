@@ -18,7 +18,7 @@ module.exports = async ({ points, sdk }) => {
           {
             "property": "PROP_OBJECT_NAME",
             "value": {
-              "character_string": "Heartbeat"
+              "character_string": point.name
             }
           }
         ]

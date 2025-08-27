@@ -1,6 +1,6 @@
 {
   "$schema": "https://portal.normal-online.net/schema/HookRegistry.json",
-  "name": "Normal Framework Hook Registry",
+  "name": "Default Hook Registry",
   "hooks": [
     {
       "name": "Export Bacnet Objects",
