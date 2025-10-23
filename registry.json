@@ -10,10 +10,6 @@
         {
           "path": "registry/export-bacnet-objects/hook.js",
           "type": "registry:entry"
-        },
-        {
-          "path": "registry/lib/helpers.js",
-          "type": "registry:lib"
         }
       ]
     },
@@ -25,10 +21,94 @@
         {
           "path": "registry/not/hook.js",
           "type": "registry:entry"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Average",
+      "description": "A hook to calculate the average of input values",
+      "definition": "registry/average/hook-def.json",
+      "files": [
         {
-          "path": "registry/lib/helpers.js",
-          "type": "registry:lib"
+          "path": "registry/average/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Derivative",
+      "description": "A hook to calculate the derivative of input values",
+      "definition": "registry/derivative/hook-def.json",
+      "files": [
+        {
+          "path": "registry/derivative/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Moving Average",
+      "description": "A hook to calculate the moving average of input values",
+      "definition": "registry/moving-average/hook-def.json",
+      "files": [
+        {
+          "path": "registry/moving-average/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Sine Wave Generator",
+      "description": "A hook to generate a sine wave",
+      "definition": "registry/sine-wave-generator/hook-def.json",
+      "files": [
+        {
+          "path": "registry/sine-wave-generator/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Smoothed Average",
+      "description": "A hook to calculate a smoothed average of input values",
+      "definition": "registry/smoothed-average/hook-def.json",
+      "files": [
+        {
+          "path": "registry/smoothed-average/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Square Wave Generator",
+      "description": "A hook to generate a square wave",
+      "definition": "registry/square-wave-generator/hook-def.json",
+      "files": [
+        {
+          "path": "registry/square-wave-generator/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Sum",
+      "description": "A hook to calculate the sum of input values",
+      "definition": "registry/sum/hook-def.json",
+      "files": [
+        {
+          "path": "registry/sum/hook.js",
+          "type": "registry:entry"
+        }
+      ]
+    },
+    {
+      "name": "Threshold",
+      "description": "A hook to apply a threshold to input values",
+      "definition": "registry/threshold/hook-def.json",
+      "files": [
+        {
+          "path": "registry/threshold/hook.js",
+          "type": "registry:entry"
         }
       ]
     }
