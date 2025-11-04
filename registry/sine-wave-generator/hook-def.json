@@ -6,9 +6,36 @@
       "type": "VARIABLE_TYPE_GLOBAL"
     }
   ],
-  "inputs": [
+  "parameters": [
     {
-      "name": "in"
+      "name": "amplitude",
+      "value": {
+        "real": 0
+      }
+    },
+    {
+      "name": "freqHz",
+      "value": {
+        "real": 0
+      }
+    },
+    {
+      "name": "phase",
+      "value": {
+        "real": 0
+      }
+    },
+    {
+      "name": "offset",
+      "value": {
+        "real": 0
+      }
+    },
+    {
+      "name": "startTime",
+      "value": {
+        "real": 0
+      }
     }
   ]
 }
