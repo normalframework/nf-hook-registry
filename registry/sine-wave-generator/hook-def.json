@@ -2,8 +2,7 @@
   "$schema": "../../schema/HookDefinition.json",
   "outputs": [
     {
-      "label": "out",
-      "type": "VARIABLE_TYPE_GLOBAL"
+      "label": "out"
     }
   ],
   "parameters": [

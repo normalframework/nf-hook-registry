@@ -5,10 +5,13 @@ const NormalSdk = require("@normalframework/applications-sdk");
  * @param {NormalSdk.InvokeParams} params
  * @returns {NormalSdk.InvokeResult}
  */
-module.exports = async ({ points, sdk }) => {
+module.exports = async ({ points, groupVariables }) => {
+  let sum = 0;
   for (const point of points) {
-    let newval = point.latestValue.value ? 0 : 1;
-    sdk.logEvent(`setting value of ${point.name} to ${newval}`)
-    await point.write(newval)
+    const [val] = await point.read();
+    sum += val.value;
   }
+  const avg = sum / points.length;
+  const out = groupVariables.byLabel('out').first();
+  await out.write(avg);
 };
